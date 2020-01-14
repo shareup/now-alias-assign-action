@@ -1,0 +1,31 @@
+name: now-alias-assign
+description: GitHub action to assign an alias to a now deployment
+
+inputs:
+  token:
+    required: true
+    description: Zeit API token (set in secrets and use interpolation to include it)
+  deployment:
+    required: true
+    description: URL or ID of deployment
+  alias:
+    required: true
+    description: URL of alias to assign
+  scope:
+    required: false
+    description: Scope (or team slug) for the deployment (recommended to set inside the now.json file)
+  debug:
+    required: false
+    description: If true, then output debugging information
+    default: false
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    INPUT_TOKEN: ${{ inputs.token }}
+    INPUT_DEPLOYMENT: ${{ inputs.deployment }}
+    INPUT_ALAIS: ${{ inputs.alias }}
+    INPUT_SCOPE: ${{ inputs.scope }}
+    INPUT_DEBUG: ${{ inputs.debug }}
+
